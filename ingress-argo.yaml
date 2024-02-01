@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argo-server
+  namespace: argocd
+  annotations:
+   #traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+   #traefik.ingress.kubernetes.io/router.tls: "true"
+   #traefik.ingress.kubernetes.io/router.tls.certresolver: "le"
+   #cert-manager.io/issuer: "letsencrypt-cluster-issuer"
+   traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: argo.dsliz.info
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: traefik
+            port:
+              number: 80    
