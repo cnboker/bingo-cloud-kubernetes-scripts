@@ -1,0 +1,1 @@
+# bingo-cloud-kubernetes-scripts
