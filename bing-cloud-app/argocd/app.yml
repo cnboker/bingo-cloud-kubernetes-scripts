@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bingo-cloud-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.com/cnboker1/bingo-cloud-app.git
+    targetRevision: HEAD
+    path: bing-cloud-app/deployment
+  destination:
+    server: https://kubernetes.docker.internal:6443 # K8s on Docker Desktop
+    namespace: bingo
+  syncPolicy:
+    automated:
+      selfHeal: true
